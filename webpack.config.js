@@ -8,14 +8,12 @@ module.exports = {
   entry: ['./client/index.js'],
 
   //location to create the bundle.js file that will contain the consolidated application
-  output: [
-    {
-      //location will be the build folder created in the root
-      path: path.join(__dirname, 'build'),
-      //bundle.js will be the name
-      file: 'bundle.js',
-    },
-  ],
+  output: {
+    //location will be the build folder created in the root
+    path: path.join(__dirname, 'build'),
+    //bundle.js will be the name
+    filename: 'bundle.js',
+  },
   //setup development server
   devServer: {
     //listen on port 8080
