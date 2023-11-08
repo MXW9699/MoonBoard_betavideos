@@ -23,6 +23,7 @@ module.exports = {
     proxy: {
       '/login': 'http://localhost:3000',
       '/data': 'http://localhost:3000',
+      '/updateVideo': 'http://localhost:3000',
       '/**': 'http://localhost:3000',
     },
   },

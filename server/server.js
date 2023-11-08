@@ -12,31 +12,44 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded());
 
-//import controllers
+/*********************CONTROLLER IMPORTS**************************************** */
 const users = require('./controllers/userController');
+const problems = require('./controllers/problemController');
+const videos = require('./controllers/videoController');
 
 //statically serve the build folder which contains the bundle
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
+/*********************LOAD PAGES**************************************** */
 //main page get. send them the html file
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
-// //handle login request
-app.post('/login', users.verifyUser, users.addUser, (req, res) => {
-  return res.redirect('/data');
-});
-
-// //get data
+//get database page
 app.get('/data', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
+/*********************ACTIONS**************************************** */
+//handle login request
+app.post('/login', users.verifyUser, users.addUser, (req, res) => {
+  return res.redirect('/data');
+});
+
+//get problem lists
+app.get('/problemList', problems.getList, (req, res) => {
+  return res.status(200).json(res.locals.problemsList);
+});
+
+app.post('/updateVideo', videos.updateVideo, (req, res) => {
+  return res.sendStatus(200);
+});
+/*********************ERROR HANDLERS**************************************** */
 // //404 ERROR HANDLER
-// app.use('*', (req, res) => {
-//   return res.status(404).send('WHERE ARE YOU GOING?!?!?!');
-// });
+app.use('*', (req, res) => {
+  return res.status(404).send('WHERE ARE YOU GOING?!?!?!');
+});
 
 // //global error handler
 app.use((err, req, res, next) => {
