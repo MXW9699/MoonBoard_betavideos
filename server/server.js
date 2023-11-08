@@ -15,7 +15,10 @@ app.use(express.urlencoded());
 /*********************CONTROLLER IMPORTS**************************************** */
 const users = require('./controllers/userController');
 const problems = require('./controllers/problemController');
-const videos = require('./controllers/videoController');
+
+/*********************ROUTER IMPORTS**************************************** */
+const videosRouter = require('./routers/videoRouter')
+
 
 //statically serve the build folder which contains the bundle
 app.use('/build', express.static(path.join(__dirname, '../build')));
@@ -42,9 +45,9 @@ app.get('/problemList', problems.getList, (req, res) => {
   return res.status(200).json(res.locals.problemsList);
 });
 
-app.post('/updateVideo', videos.updateVideo, (req, res) => {
-  return res.sendStatus(200);
-});
+//handle everything in the router
+app.use('/video', videosRouter)
+
 /*********************ERROR HANDLERS**************************************** */
 // //404 ERROR HANDLER
 app.use('*', (req, res) => {
