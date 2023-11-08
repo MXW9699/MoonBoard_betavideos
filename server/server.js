@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 });
 
 // //handle login request
-app.post('/login', users.verifyUser, (req, res) => {
+app.post('/login', users.verifyUser, users.addUser, (req, res) => {
   return res.redirect('/data');
 });
 
