@@ -20,7 +20,11 @@ module.exports = {
     port: 8080,
     static: { directory: path.join(__dirname, 'build'), publicPath: '/' },
     //set up proxies
-    proxy: {},
+    proxy: {
+      '/login': 'http://localhost:3000',
+      '/data': 'http://localhost:3000',
+      '/**': 'http://localhost:3000',
+    },
   },
 
   //template to follow when creating the webserver for dev enviroment
