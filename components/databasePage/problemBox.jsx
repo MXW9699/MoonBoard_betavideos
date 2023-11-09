@@ -12,6 +12,7 @@ const problemBox = ({ problemList, clickProblem }) => {
         _id={`${problemList[i].name}`}
         setter={`${problemList[i].setter}`}
         grade={`${problemList[i].grade}`}
+        holds={problemList[i].holds}
         clickProblem={clickProblem}
       />
     );

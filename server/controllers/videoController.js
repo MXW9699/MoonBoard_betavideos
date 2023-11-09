@@ -17,15 +17,15 @@ module.exports = {
   },
 
   updateVideo: (req, res, next) => {
-    const { link, problemName } = req.body;
-    if (!(link && problemName)) {
+    const { username, link, problemName } = req.body;
+    if (!(username && link && problemName)) {
       return next({ message: { err: 'empty fields' } });
     }
     console.log('updating');
     db.from('Videos')
       .update({ link: link.replace('/p/', '/reel/') + 'embed' })
       .eq('problemName', problemName.toUpperCase())
-      .eq('uploaded_by', 1)
+      .eq('uploaded_by', username)
       .then((data) => {
         console.log(data);
         return next();
@@ -72,7 +72,7 @@ module.exports = {
     db.from('Videos')
       .delete()
       .eq('problemName', problemName)
-      .eq('uploaded_by', username)
+      .eq('uploaded_by', 1)
       .then((data) => {
         console.log(data);
         return next();

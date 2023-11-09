@@ -17,10 +17,10 @@ const users = require('./controllers/userController');
 const problems = require('./controllers/problemController');
 
 /*********************ROUTER IMPORTS**************************************** */
-const videosRouter = require('./routers/videoRouter')
+const videosRouter = require('./routers/videoRouter');
+const problemRouter = require('./routers/problemRouter');
 
-
-//statically serve the build folder which contains the bundle
+//statically serve the build folder which contains the bundle in the production environment
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 /*********************LOAD PAGES**************************************** */
@@ -40,13 +40,14 @@ app.post('/login', users.verifyUser, users.addUser, (req, res) => {
   return res.redirect('/data');
 });
 
-//get problem lists
-app.get('/problemList', problems.getList, (req, res) => {
-  return res.status(200).json(res.locals.problemsList);
+app.use('/updateHolds', problems.updateHolds, (req, res) => {
+  res.sendStatus(200);
 });
 
 //handle everything in the router
-app.use('/video', videosRouter)
+//get problem lists
+app.use('/problemList', problemRouter);
+app.use('/video', videosRouter);
 
 /*********************ERROR HANDLERS**************************************** */
 // //404 ERROR HANDLER

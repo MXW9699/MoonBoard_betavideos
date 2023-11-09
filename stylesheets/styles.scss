@@ -1,6 +1,7 @@
 body {
   background-color: rgb(202, 202, 157);
   font-family: sans-serif;
+  margin: 0px;
 }
 
 .row {
@@ -25,15 +26,19 @@ body {
 }
 
 .board {
-  border: 1px solid red;
   background-color: white;
   width: auto;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .problem {
   height: 50px;
   width: 350px;
   border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  background-color: goldenrod;
   &:hover {
     background-color: lightgray;
   }
@@ -48,7 +53,8 @@ body {
 .problemSection {
   display: flex;
   justify-content: space-around;
-  border: 1px solid red;
+  background-color: black;
+  padding: 10px 0px;
 }
 
 .videoSection {
@@ -70,12 +76,22 @@ body {
   flex-direction: column;
   background-color: black;
   position: relative;
+  gap: 1em;
+  button {
+    border: none;
+    height: 50px;
+    background-color: white;
+    border-radius: 5px;
+    &:hover {
+      background-color: gold;
+    }
+  }
 }
 
-// .datapage {
-//   display: 'grid';
-//   grid-template-columns: [first] 200px [line2] auto [end];
-// }
+.datapage {
+  width: 100vw;
+  margin: 0px;
+}
 
 .datapage {
   display: flex;

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const addVideoForm = ({ formstate }) => {
+const addVideo = ({ formstate }) => {
   return (
-    <div className="addVideoForm">
+    <>
       <h1 style={{ textAlign: 'center' }}>CONTRIBUTIONS</h1>
       <form
         className="flex"
@@ -24,8 +24,8 @@ const addVideoForm = ({ formstate }) => {
         <input type="submit" value="submit"></input>
         <button onClick={formstate}>cancel</button>
       </form>
-    </div>
+    </>
   );
 };
 
-export default addVideoForm;
+export default addVideo;

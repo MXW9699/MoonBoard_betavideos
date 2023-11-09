@@ -18,7 +18,7 @@ module.exports = {
   devServer: {
     //listen on port 8080
     port: 8080,
-    static: { directory: path.join(__dirname, 'build'), publicPath: '/' },
+    static: { directory: path.join(__dirname, 'build'), publicPath: '/build/' },
     //set up proxies
     proxy: {
       '/login': 'http://localhost:3000',
