@@ -1,0 +1,102 @@
+body {
+  background-color: rgb(202, 202, 157);
+  font-family: sans-serif;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: aqua;
+}
+
+.hold {
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.board {
+  border: 1px solid red;
+  background-color: white;
+  width: auto;
+}
+
+.problem {
+  height: 50px;
+  width: 350px;
+  border: 1px solid black;
+  &:hover {
+    background-color: lightgray;
+  }
+}
+
+.problemBox {
+  height: 600px;
+  overflow: scroll;
+  border: 1px solid black;
+}
+
+.problemSection {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid red;
+}
+
+.videoSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.videoBox {
+  height: 350px;
+  width: 350px;
+  margin: 10px;
+  border: 1px solid green;
+}
+
+.sideNav {
+  display: flex;
+  width: 700px;
+  flex-direction: column;
+  background-color: black;
+  position: relative;
+}
+
+// .datapage {
+//   display: 'grid';
+//   grid-template-columns: [first] 200px [line2] auto [end];
+// }
+
+.datapage {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.addVideoForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: 400px;
+  background-color: white;
+  border-radius: 10px;
+  border: 5px solid rgb(159, 159, 132);
+  position: fixed;
+  box-shadow: 20px 10px 10px rgb(151, 155, 87);
+}
+
+input {
+  height: 30px;
+}
