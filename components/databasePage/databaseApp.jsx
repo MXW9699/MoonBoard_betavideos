@@ -5,12 +5,11 @@ import React, { useState, useEffect } from 'react';
 
 let boardLights = new Set();
 
-const databaseApp = () => {
+const databaseApp = ({search}) => {
   /*********************************USE STATES********************************************* */
   const [data, setdata] = useState(['help', 'me', 'find', 'problems']); //PROBLEM LIST
   const [videosToGet, setVideosToGet] = useState(''); //STORE THE PROBLEM NAME THAT THE VIDEOS WILL DEPEND ON
   const [vids, setVids] = useState([]); //ARRAY OF THE VIDEOS LINKS FETCHED
-  const [search, setSearch] = useState('');
   // const [boardLights, setboardLights] = useState([]);
   /*********************************USE EFFECTS************************************************* */
 
@@ -27,7 +26,7 @@ const databaseApp = () => {
       .then((data) => setdata(data))
       .catch(() => console.log('COULD NOT GET PROBLEM LIST'));
     return () => {};
-  }, []);
+  }, [search]);
 
   //PROBLEM NAME OF VIDEO DEPENDENT.
   //useEffect to fetch videos & to get the holds list and store it
@@ -56,6 +55,12 @@ const databaseApp = () => {
     boardLights = new Set(boardLights);
     setVideosToGet(_id);
   };
+
+
+  /*****************************SEARCH HANDLERS ********************************************** */
+const searchHandler = (e) =>{
+  setSearch(e.target.value)
+}
 
   return (
     <div className="dataApp">

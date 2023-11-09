@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-const searchBar = () => {
-  // const {search, setSearch} = useState("")
-
-  return <textarea onChange={(e) => console.log(e.target.value)} />;
+const searchBar = ({ searchHandler }) => {
+  return <textarea onChange={(e) => searchHandler(e)} />;
 };
 
 export default searchBar;

@@ -5,7 +5,9 @@ const holdset = [];
 module.exports = {
   //get problems
   getList: (req, res, next) => {
+    console.log(req.params.id);
     let search = req.params.id ? req.params.id : '';
+
     db.from('Problems')
       .select('*')
       .ilike('name', `%${search}%`)
