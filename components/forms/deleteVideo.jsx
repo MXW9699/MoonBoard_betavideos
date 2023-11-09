@@ -4,12 +4,7 @@ const deleteVideo = ({ formstate }) => {
   return (
     <>
       <h1 style={{ textAlign: 'center' }}>Delete Video</h1>
-      <form
-        className="flex"
-        method="DELETE"
-        action="/video/delete"
-        style={{ width: '500px' }}
-      >
+      <form className="flex" method="POST" action="/video/delete" style={{ width: '500px' }}>
         <input
           name="problemName"
           type="text"

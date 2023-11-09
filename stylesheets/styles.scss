@@ -4,6 +4,32 @@ body {
   margin: 0px;
 }
 
+.login {
+  background-color: white;
+  position: fixed;
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  border-radius: 20px;
+  font-size: 40px;
+  h1 {
+    margin: 0;
+  }
+}
+
+.loginbutton {
+  background-color: gold;
+  border: none;
+  border-radius: 10px;
+  height: 75px;
+  width: 150px;
+  font-size: 25px;
+  padding: 0px;
+  &:hover {
+    background-color: goldenrod;
+  }
+}
 .row {
   display: flex;
   flex-direction: row;
@@ -13,8 +39,8 @@ body {
 .flex {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  background-color: aqua;
+  align-items: center;
+  justify-content: center;
 }
 
 .hold {
@@ -47,13 +73,16 @@ body {
 .problemBox {
   height: 600px;
   overflow: scroll;
+  background-color: rgb(30, 27, 24);
   border: 1px solid black;
 }
 
 .problemSection {
   display: flex;
+  align-self: flex-end;
   justify-content: space-around;
   background-color: black;
+  margin-top: 50px;
   padding: 10px 0px;
 }
 
@@ -72,10 +101,13 @@ body {
 
 .sideNav {
   display: flex;
-  width: 700px;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 50px;
+  width: 100vw;
   background-color: black;
-  position: relative;
+  top: 0px;
+  position: fixed;
   gap: 1em;
   button {
     border: none;
@@ -95,12 +127,15 @@ body {
 
 .datapage {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
 }
 
 .addVideoForm {
   display: flex;
+  top: 25%;
+  left: 25%;
   flex-direction: column;
   justify-content: center;
   align-items: center;

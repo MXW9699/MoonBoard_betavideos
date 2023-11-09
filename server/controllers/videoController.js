@@ -60,15 +60,8 @@ module.exports = {
   },
 
   deleteVideos: (req, res, next) => {
-    const { username, link, problemName } = req.body;
-    // db.from('Videos')
-    //   .select('*')
-    //   .eq('problemName', problemName)
-    //   .eq('uploaded_by', username)
-    //   .then((data) => {
-    //     console.log(data);
-    //     return next();
-    //   });
+    console.log('STARTING TO DELETE');
+    const { problemName } = req.body;
     db.from('Videos')
       .delete()
       .eq('problemName', problemName)
@@ -78,7 +71,7 @@ module.exports = {
         return next();
       })
       .catch(() => {
-        return next({ log: 'error in getting videos' });
+        return next({ log: 'error in deleting video' });
       });
   },
 };

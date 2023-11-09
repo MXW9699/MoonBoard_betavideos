@@ -16,8 +16,8 @@ router.post('/add', videos.updateVideo, videos.addVideo, (req, res) => {
   return res.status(200);
 });
 
-router.delete('/delete', videos.deleteVideos, (req, res) => {
-  return res.status(200).send('deleted');
+router.post('/delete', videos.deleteVideos, (req, res) => {
+  return res.redirect('/data');
 });
 //exporting the router
 module.exports = router;
