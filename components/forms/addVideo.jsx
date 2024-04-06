@@ -21,7 +21,7 @@ const addVideo = ({ formstate }) => {
           type="text"
           placeholder="ex. https://www.instagram.com/p/Cy7MfKbuyqs/"
         ></input>
-        <input type="submit" value="submit"></input>
+        <input type="submit" value="submit" ></input>
         <button onClick={formstate}>cancel</button>
       </form>
     </>

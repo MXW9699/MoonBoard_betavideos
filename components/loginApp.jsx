@@ -5,7 +5,7 @@ const loginApp = () => {
     <>
       <div className="login flex">
         <h1>MitchBoard</h1>
-        <h1>help me out</h1>
+        <h3>Help me out!</h3>
         <form method="POST" action="/login">
           <input name="username" type="text" placeholder="username"></input>
           <input name="password" type="password" placeholder="password"></input>
