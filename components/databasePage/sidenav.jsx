@@ -6,7 +6,10 @@ const sideNav = ({ formstate, searchHandler }) => {
       <h1 style={{ color: 'white', textAlign: 'center', margin: '1px' }}>
         Moonboard Videos
       </h1>
-      <textarea onChange={(e) => searchHandler(e)} />
+      <div>
+      <textarea onChange={(e) => searchHandler(e)} placeholder='Search Problems...'/>
+      <img src='/build/filter.svg' width={`35px`} height={'35px'}/>
+      </div>
       <button onClick={() => formstate('add')}>ADD BETA VIDEO</button>
       <button> CREATE PROBLEM</button>
       <button onClick={() => formstate('del')}>DELETE VIDEO</button>
