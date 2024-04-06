@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SideNav from './databasePage/sidenav.jsx';
-import DatabaseApp from './databasePage/databaseApp.jsx';
+import ProblemsView from './databasePage/ProblemsView.jsx';
 import Popup from './forms/popup.jsx';
 import { useState } from 'react';
 
@@ -10,6 +10,22 @@ const databasePage = () => {
   /*****************************STATES ********************************************** */
   const [openForm, setOpenForm] = useState(false); // FOR ADD AND DELETE FORMS
   const [search, setSearch] = useState(''); // FOR SEARCH BAR FILTERING
+  const [data, setData] = useState(null);
+
+  async function getListOfProblems() {
+    try {
+      const response = await fetch(`/problemList/${search}`);
+      if (!response.ok) throw new Error('COULD NOT GET PROBLEM LIST');
+      const data = await response.json();
+      setData(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    getListOfProblems();
+  }, []);
 
   /*****************************SEARCH HANDLERS ********************************************** */
   const formstate = (form = '') => {
@@ -23,11 +39,11 @@ const databasePage = () => {
   };
 
   return (
-    <page className="datapage">
+    <div className="datapage">
       <SideNav formstate={formstate} searchHandler={searchHandler} />
-      <DatabaseApp search={search} />
+      <ProblemsView data={data} />
       {openForm ? <Popup formstate={formstate} option={option} /> : <></>}
-    </page>
+    </div>
   );
 };
 

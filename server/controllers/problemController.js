@@ -5,15 +5,13 @@ const holdset = [];
 module.exports = {
   //get problems
   getList: (req, res, next) => {
-    console.log(req.params.id);
-    let search = req.params.id ? req.params.id : '';
+    let search = req.params.id ?? '';
 
-    db.from('Problems')
+    db.from('Problems_2019')
       .select('*')
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true })
       .then((data) => {
-        //an array of objects
         res.locals.problemsList = data.data;
         return next();
       })

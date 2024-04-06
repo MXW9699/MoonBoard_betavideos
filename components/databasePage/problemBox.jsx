@@ -9,6 +9,7 @@ const problemBox = ({ problemList, clickProblem }) => {
   for (let i = 0; i < problemList.length; i++) {
     probs.push(
       <Problem
+        key={problemList[i].name}
         _id={`${problemList[i].name}`}
         setter={`${problemList[i].setter}`}
         grade={`${problemList[i].grade}`}
