@@ -1,0 +1,17 @@
+import React from 'react';
+
+const sideNav = ({ formstate, searchHandler }) => {
+  return (
+    <nav className="sideNav">
+      <h1 style={{ color: 'white', textAlign: 'center', margin: '1px' }}>
+        Moonboard Videos
+      </h1>
+      <textarea onChange={(e) => searchHandler(e)} />
+    <button onClick={() => formstate('add')}>ADD BETA VIDEO</button>
+      <button> CREATE PROBLEM</button>
+      <button onClick={() => formstate('del')}>DELETE VIDEO</button>
+    </nav>
+  );
+};
+
+export default sideNav;

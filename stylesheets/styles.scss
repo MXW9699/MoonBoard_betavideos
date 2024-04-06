@@ -1,0 +1,153 @@
+body {
+  background-color: rgb(202, 202, 157);
+  font-family: sans-serif;
+  margin: 0px;
+}
+
+.login {
+  background-color: white;
+  position: fixed;
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  border-radius: 20px;
+  font-size: 40px;
+  h1 {
+    margin: 0;
+  }
+}
+
+.loginbutton {
+  background-color: gold;
+  border: none;
+  border-radius: 10px;
+  height: 75px;
+  width: 150px;
+  font-size: 25px;
+  padding: 0px;
+  &:hover {
+    background-color: goldenrod;
+  }
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hold {
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.board {
+  background-color: white;
+  width: auto;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.problem {
+  height: 50px;
+  width: 350px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  background-color: goldenrod;
+  &:hover {
+    background-color: lightgray;
+  }
+}
+
+.problemBox {
+  height: 600px;
+  overflow: scroll;
+  background-color: rgb(30, 27, 24);
+  border: 1px solid black;
+}
+
+.problemSection {
+  display: flex;
+  align-self: flex-end;
+  justify-content: space-around;
+  background-color: black;
+  margin-top: 50px;
+  padding: 10px 0px;
+}
+
+.videoSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.videoBox {
+  height: 350px;
+  width: 350px;
+  margin: 10px;
+  border: 1px solid green;
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 50px;
+  width: 100vw;
+  background-color: black;
+  top: 0px;
+  position: fixed;
+  gap: 1em;
+  button {
+    border: none;
+    height: 50px;
+    background-color: white;
+    border-radius: 5px;
+    &:hover {
+      background-color: gold;
+    }
+  }
+}
+
+.datapage {
+  width: 100vw;
+  margin: 0px;
+}
+
+.datapage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.addVideoForm {
+  display: flex;
+  top: 25%;
+  left: 25%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: 400px;
+  background-color: white;
+  border-radius: 10px;
+  border: 5px solid rgb(159, 159, 132);
+  position: fixed;
+  box-shadow: 20px 10px 10px rgb(151, 155, 87);
+}
+
+input {
+  height: 30px;
+}
