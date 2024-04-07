@@ -4,13 +4,13 @@ import ProblemsView from './databasePage/ProblemsView.jsx';
 import Popup from './forms/popup.jsx';
 import { useState } from 'react';
 
-let option = '';
-
 const databasePage = () => {
   /*****************************STATES ********************************************** */
   const [openForm, setOpenForm] = useState(false); // FOR ADD AND DELETE FORMS
   const [search, setSearch] = useState(''); // FOR SEARCH BAR FILTERING
   const [data, setData] = useState(null);
+  const [form, setForm] = useState('');
+  const [filters, setFilter] = useState(null);
 
   async function getListOfProblems() {
     try {
@@ -28,21 +28,33 @@ const databasePage = () => {
   }, []);
 
   /*****************************SEARCH HANDLERS ********************************************** */
-  const formstate = (form = '') => {
-    option = form;
-    if (openForm == true) setOpenForm(false);
-    else setOpenForm(true);
+  const formstate = (form) => {
+    setForm(form);
+    setOpenForm((prev) => !prev);
   };
 
   const searchHandler = (e) => {
-    setSearch(e.target.value);
+    setSearch(e.target.value.toUpperCase());
   };
+
+  const filterData = (data) => {
+    return data?.filter((problem) => {
+      return problem.id > 30;
+    });
+  };
+
+  let filteredData = filterData(data);
+  console.log(filteredData);
+
+  filteredData = filteredData?.filter((problem) => {
+    return problem.name.includes(search);
+  });
 
   return (
     <div className="datapage">
       <SideNav formstate={formstate} searchHandler={searchHandler} />
-      <ProblemsView data={data} />
-      {openForm ? <Popup formstate={formstate} option={option} /> : <></>}
+      <ProblemsView data={filteredData} />
+      {openForm && <Popup option={form} />}
     </div>
   );
 };

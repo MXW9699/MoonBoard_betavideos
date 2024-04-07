@@ -2,7 +2,7 @@ import React from 'react';
 
 const addVideo = ({ formstate }) => {
   return (
-    <>
+    <div>
       <h1 style={{ textAlign: 'center' }}>CONTRIBUTIONS</h1>
       <form
         className="flex"
@@ -22,9 +22,9 @@ const addVideo = ({ formstate }) => {
           placeholder="ex. https://www.instagram.com/p/Cy7MfKbuyqs/"
         ></input>
         <input type="submit" value="submit" ></input>
-        <button onClick={formstate}>cancel</button>
+        <button onClick={()=>formstate()}>cancel</button>
       </form>
-    </>
+    </div>
   );
 };
 
