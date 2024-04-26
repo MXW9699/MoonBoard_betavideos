@@ -13,7 +13,7 @@ app.use(cookieParser());
 app.use(express.urlencoded());
 
 /*********************CONTROLLER IMPORTS**************************************** */
-const users = require('./controllers/userController');
+const users = require('./controllers/userController.js');
 const problems = require('./controllers/problemController');
 
 /*********************ROUTER IMPORTS**************************************** */

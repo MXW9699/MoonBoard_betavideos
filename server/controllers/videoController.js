@@ -27,7 +27,7 @@ module.exports = {
       .eq('problemName', problemName.toUpperCase())
       .eq('uploaded_by', username)
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         return next();
       })
       .catch(() => {
@@ -37,7 +37,7 @@ module.exports = {
 
   addVideo: (req, res, next) => {
     let { username, link, problemName } = req.body;
-    if (username == 'DYNA.MITCH') username = '1'
+    if (username == 'DYNA.MITCH') username = '1';
     if (!(username && link && problemName)) {
       return next({ message: { err: 'empty fields' } });
     }

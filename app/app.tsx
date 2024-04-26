@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginApp from './loginApp.jsx';
-import DatabasePage from './databasePage.jsx';
+import LoginApp from './loginApp';
+import DatabasePage from './databasePage';
 
 const app = () => {
   return (
