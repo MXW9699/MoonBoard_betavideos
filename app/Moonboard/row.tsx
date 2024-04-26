@@ -1,7 +1,7 @@
 import React from 'react';
-import Hold from './hold.jsx';
+import Hold from './hold';
 
-const row = ({ rowID, boardLights }) => {
+const row = ({ rowID, boardLights } : any) => {
   const LETTERS = 'ABCDEFGHIJK';
 
   const rowOf11 = [];

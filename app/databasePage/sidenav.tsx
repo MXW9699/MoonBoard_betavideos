@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+import { FormType } from '../types/types';
 
-const sideNav = ({ formstate, searchHandler }) => {
+const sideNav = ({
+  formHandler,
+  searchHandler,
+}: {
+  formHandler: (a: FormType) => void;
+  searchHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+}) => {
   return (
     <nav className="sideNav">
       <h1 style={{ color: 'white', textAlign: 'center', margin: '1px' }}>
@@ -15,12 +22,12 @@ const sideNav = ({ formstate, searchHandler }) => {
           src="/build/filter.svg"
           width={`35px`}
           height={'35px'}
-          onClick={() => formstate('filter')}
+          onClick={() => formHandler('FILTER')}
         />
       </div>
-      <button onClick={() => formstate('add')}>ADD BETA VIDEO</button>
+      <button onClick={() => formHandler('ADD')}>ADD BETA VIDEO</button>
       <button> CREATE PROBLEM</button>
-      <button onClick={() => formstate('delete')}>DELETE VIDEO</button>
+      <button onClick={() => formHandler('DELETE')}>DELETE VIDEO</button>
     </nav>
   );
 };

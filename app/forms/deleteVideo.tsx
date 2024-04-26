@@ -1,6 +1,6 @@
 import React from 'react';
 
-const deleteVideo = ({ formstate }) => {
+const deleteVideo = ({ closeForm }: { closeForm: () => void }) => {
   return (
     <>
       <h1 style={{ textAlign: 'center' }}>Delete Video</h1>
@@ -17,7 +17,7 @@ const deleteVideo = ({ formstate }) => {
         ></input>
 
         <input type="submit" value="submit"></input>
-        <button onClick={formstate}>cancel</button>
+        <button onClick={closeForm}>cancel</button>
       </form>
     </>
   );

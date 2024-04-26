@@ -1,6 +1,6 @@
 import React from 'react';
 
-const hold = ({ _id, color }) => {
+const hold = ({ _id, color }: any) => {
   return (
     <div
       className="hold"
