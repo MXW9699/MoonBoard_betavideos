@@ -1,11 +1,12 @@
-import Moonboard from '../Moonboard/moonboard.jsx';
-import ProblemBox from './problemBox.jsx';
-import VideoSection from './videosSection.jsx';
+import Moonboard from '../Moonboard/moonboard';
+import { Problem } from '../types/types';
+import ProblemBox from './problemBox';
+import VideoSection from './videosSection';
 import React, { useState, useEffect } from 'react';
 
-let boardLights = new Set();
+let boardLights = new Set<any>();
 
-export default function ProblemsView({ data }) {
+export default function ProblemsView({ data }: { data: Problem[] }) {
   /*********************************USE STATES********************************************* */
   const [videosToGet, setVideosToGet] = useState(''); //STORE THE PROBLEM NAME THAT THE VIDEOS WILL DEPEND ON
   const [vids, setVids] = useState([]); //ARRAY OF THE VIDEOS LINKS FETCHED
@@ -23,13 +24,12 @@ export default function ProblemsView({ data }) {
 
   /**
    * CHANGE WHICH PROBLEM TO VIDEOS FOR
-   * @param {string} _id problem name string
+   * @param {string} name problem name string
    * @param {string[]} holds array of holds for that specific problem
    */
-  const clickProblem = (_id, holds) => {
-    boardLights = holds ? holds : [];
-    boardLights = new Set(boardLights);
-    setVideosToGet(_id);
+  function clickProblem(name: string, holds?: any[]):void{
+    boardLights = holds ? new Set(holds) : new Set<any>();
+    setVideosToGet(name);
   };
 
   useEffect(() => {

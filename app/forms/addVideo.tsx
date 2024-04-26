@@ -1,8 +1,8 @@
 import React from 'react';
 
-const addVideo = ({ formstate }) => {
+const addVideo = ({ closeForm }: { closeForm: () => void }) => {
   return (
-    <>
+    <div>
       <h1 style={{ textAlign: 'center' }}>CONTRIBUTIONS</h1>
       <form
         className="flex"
@@ -21,10 +21,10 @@ const addVideo = ({ formstate }) => {
           type="text"
           placeholder="ex. https://www.instagram.com/p/Cy7MfKbuyqs/"
         ></input>
-        <input type="submit" value="submit" ></input>
-        <button onClick={formstate}>cancel</button>
+        <input type="submit" value="submit"></input>
+        <button onClick={closeForm}>cancel</button>
       </form>
-    </>
+    </div>
   );
 };
 
