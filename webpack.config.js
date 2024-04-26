@@ -50,6 +50,12 @@ module.exports = {
           },
         },
       },
+      //typescript to js/jsx
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ['ts-loader'],
+      },
       //rules to change sass files to css to strings that will be injected into the html body
       {
         test: /\.s?css/,
@@ -58,4 +64,7 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.jsx', '.js', '.tsx', '.ts'],
+  }
 };

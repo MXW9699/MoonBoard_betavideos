@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
-import SideNav from './databasePage/sidenav.jsx';
-import ProblemsView from './databasePage/ProblemsView.jsx';
-import Popup from './forms/popup.jsx';
+import React, { ChangeEvent, useEffect } from 'react';
+import SideNav from './databasePage/sidenav';
+import ProblemsView from './databasePage/ProblemsView';
+import FormPopup from './forms/FormPopUp';
 import { useState } from 'react';
+import { FormType, Problem } from './types/types';
 
 const databasePage = () => {
   /*****************************STATES ********************************************** */
   const [openForm, setOpenForm] = useState(false); // FOR ADD AND DELETE FORMS
-  const [search, setSearch] = useState(''); // FOR SEARCH BAR FILTERING
-  const [data, setData] = useState(null);
-  const [form, setForm] = useState('');
+  const [search, setSearch] = useState(''); // FOR SEARCHBAR FILTERING
+  const [data, setData] = useState<Problem[]>([]);
+  const [form, setForm] = useState<FormType>(null);
   const [filters, setFilter] = useState(null);
 
-  async function getListOfProblems() {
+  async function getListOfProblems(): Promise<void> {
     try {
       const response = await fetch(`/problemList/${search}`);
       if (!response.ok) throw new Error('COULD NOT GET PROBLEM LIST');
@@ -28,23 +29,23 @@ const databasePage = () => {
   }, []);
 
   /*****************************SEARCH HANDLERS ********************************************** */
-  const formstate = (form) => {
+  function formHandler(form: FormType): void {
     setForm(form);
     setOpenForm((prev) => !prev);
-  };
+  }
 
-  const searchHandler = (e) => {
+  function searchHandler(e: ChangeEvent<HTMLTextAreaElement>): void {
     setSearch(e.target.value.toUpperCase());
-  };
+  }
 
-  const filterData = (data) => {
+  function filterData(data: Problem[]): Problem[] {
     return data?.filter((problem) => {
       return problem.id > 30;
     });
-  };
+  }
 
   let filteredData = filterData(data);
-  console.log(filteredData);
+  // console.log(filteredData);
 
   filteredData = filteredData?.filter((problem) => {
     return problem.name.includes(search);
@@ -52,9 +53,16 @@ const databasePage = () => {
 
   return (
     <div className="datapage">
-      <SideNav formstate={formstate} searchHandler={searchHandler} />
+      <SideNav formHandler={formHandler} searchHandler={searchHandler} />
       <ProblemsView data={filteredData} />
-      {openForm && <Popup option={form} />}
+      {openForm && (
+        <FormPopup
+          closeForm={() => {
+            setOpenForm(false);
+          }}
+          formType={form}
+        />
+      )}
     </div>
   );
 };

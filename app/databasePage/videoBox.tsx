@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const videoBox = ({ source }) => {
+const videoBox = ({ source }: { source: string }) => {
   const [loading, setLoading] = useState(true);
 
   const handleLoad = () => {
@@ -9,7 +9,8 @@ const videoBox = ({ source }) => {
 
   return (
     <div>
-      {loading && <p>Loading...</p>} {/* Conditional rendering of loading message */}
+      {loading && <p>Loading...</p>}{' '}
+      {/* Conditional rendering of loading message */}
       <iframe
         className="videoBox"
         src={source}

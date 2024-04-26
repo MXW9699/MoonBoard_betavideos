@@ -1,7 +1,8 @@
 import React from 'react';
-import VideoBox from './videoBox.jsx';
+import VideoBox from './videoBox';
+import { Video } from '../types/types';
 
-const videoSection = ({ vids }) => {
+const videoSection = ({ vids }: { vids: Video[] }) => {
   return (
     <div className="videoSection">
       {vids.map((video) => {
