@@ -10,7 +10,7 @@ const databasePage = () => {
   const [search, setSearch] = useState(''); // FOR SEARCH BAR FILTERING
   const [data, setData] = useState(null);
   const [form, setForm] = useState('');
-  const [filters, setFilter] = useState(null);
+  const [gradeFilter, setGradeFilter] = useState({ lowest: 0, highest: 15 });
 
   async function getListOfProblems() {
     try {
@@ -39,13 +39,14 @@ const databasePage = () => {
 
   const filterData = (data) => {
     return data?.filter((problem) => {
-      return problem.id > 30;
+      return (
+        problem.id >= gradeFilter.lowest * 15 &&
+        problem.id <= gradeFilter.highest * 15
+      );
     });
   };
 
   let filteredData = filterData(data);
-  console.log(filteredData);
-
   filteredData = filteredData?.filter((problem) => {
     return problem.name.includes(search);
   });
@@ -54,7 +55,13 @@ const databasePage = () => {
     <div className="datapage">
       <SideNav formstate={formstate} searchHandler={searchHandler} />
       <ProblemsView data={filteredData} />
-      {openForm && <Popup option={form} />}
+      {openForm && (
+        <Popup
+          option={form}
+          setGradeFilter={setGradeFilter}
+          gradeFilter={gradeFilter}
+        />
+      )}
     </div>
   );
 };

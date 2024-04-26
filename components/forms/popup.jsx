@@ -3,7 +3,7 @@ import AddVideo from './addVideo.jsx';
 import DeleteVideo from './deleteVideo.jsx';
 import FilterPage from './filterPage.jsx';
 
-const popUp = ({ formstate, option }) => {
+const popUp = ({ formstate, option, setGradeFilter, gradeFilter }) => {
   return (
     <div className="addVideoForm">
       {(() => {
@@ -13,7 +13,12 @@ const popUp = ({ formstate, option }) => {
           case 'delete':
             return <DeleteVideo formstate={formstate} />;
           case 'filter':
-            return <FilterPage />
+            return (
+              <FilterPage
+                setGradeFilter={setGradeFilter}
+                gradeFilter={gradeFilter}
+              />
+            );
           default:
             null;
         }
