@@ -9,19 +9,14 @@ import React, {
 } from 'react';
 import { FilterPageProps } from '../types/types';
 
-//some kind of scale
-//bar.width
-//divide into sections bar.width/range
-//
-
 export default function FilterPage({
   currentFilters,
   setFilter,
   closeForm,
 }: FilterPageProps) {
   const SEGMENTS = 17;
-  const [currentMin, setCurrentMin] = useState(currentFilters.minGrade ?? 16);
-  const [currentMax, setCurrentMax] = useState(currentFilters.maxGrade ?? 0);
+  const [notch1, setnotch1] = useState(currentFilters.minGrade ?? 16);
+  const [notch2, setnotch2] = useState(currentFilters.maxGrade ?? 0);
   const slide = useRef<HTMLDivElement>(null);
   const minSlider = useRef<HTMLDivElement>(null);
   const maxSlider = useRef<HTMLDivElement>(null);
@@ -80,12 +75,12 @@ export default function FilterPage({
   function readjust() {
     if (maxSlider.current && slide.current) {
       maxSlider.current.style.left = `${
-        (currentMax * slide.current.clientWidth) / SEGMENTS
+        (notch2 * slide.current.clientWidth) / SEGMENTS
       }px`;
     }
     if (minSlider.current && slide.current) {
       minSlider.current.style.left = `${
-        (currentMin * slide.current.clientWidth) / SEGMENTS
+        (notch1 * slide.current.clientWidth) / SEGMENTS
       }px`;
     }
   }
@@ -101,8 +96,10 @@ export default function FilterPage({
     return () => {
       window.removeEventListener('mouseup', readjust);
     };
-  }, [currentMin, currentMax]);
+  }, [notch1, notch2]);
 
+  const currentMin = Math.min(notch1, notch2);
+  const currentMax = Math.max(notch1, notch2);
   return (
     <>
       {`${currentMin} - ${currentMax}`}
@@ -113,10 +110,10 @@ export default function FilterPage({
         <div
           style={{ backgroundColor: 'blue', position: 'absolute' }}
           onMouseDown={(e) => {
-            draggable(e, setCurrentMin);
+            draggable(e, setnotch1);
           }}
           onTouchStart={(e) => {
-            draggable(e, setCurrentMin);
+            draggable(e, setnotch1);
           }}
           ref={minSlider}
         >
@@ -125,10 +122,10 @@ export default function FilterPage({
         <div
           style={{ backgroundColor: 'yellow', position: 'absolute' }}
           onMouseDown={(e) => {
-            draggable(e, setCurrentMax);
+            draggable(e, setnotch2);
           }}
           onTouchStart={(e) => {
-            draggable(e, setCurrentMax);
+            draggable(e, setnotch2);
           }}
           ref={maxSlider}
         >
@@ -137,7 +134,10 @@ export default function FilterPage({
       </div>
       <button
         onClick={() => {
-          setFilter({ minGrade: currentMin, maxGrade: currentMax });
+          setFilter({
+            maxGrade: currentMax,
+            minGrade: currentMin,
+          });
           closeForm();
         }}
       >

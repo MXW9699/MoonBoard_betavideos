@@ -3,7 +3,7 @@ import SideNav from './databasePage/sidenav';
 import ProblemsView from './databasePage/ProblemsView';
 import FormPopup from './forms/FormPopUp';
 import { useState } from 'react';
-import { Filter, FormType, Problem } from './types/types';
+import { FONT_GRADES, Filter, FormType, Problem } from './types/types';
 
 const databasePage = () => {
   /*****************************STATES ********************************************** */
@@ -43,8 +43,9 @@ const databasePage = () => {
 
   //TODO: FILTER DATA BASED ON THE FILTER STATE
   function filterData(data: Problem[]): Problem[] {
-    return data?.filter((problem) => {
-      return problem.id > 30;
+    return data?.filter((problem: Problem) => {
+      let grade = FONT_GRADES[problem.grade] as unknown as number;
+      return grade >= filters.minGrade! && grade <= filters.maxGrade!;
     });
   }
 
@@ -56,12 +57,12 @@ const databasePage = () => {
 
   return (
     <div className="datapage">
-      <SideNav formHandler={formHandler} searchHandler={searchHandler}/>
+      <SideNav formHandler={formHandler} searchHandler={searchHandler} />
       <ProblemsView data={filteredData} />
       {openForm && (
         <FormPopup
-        currentFilters={filters}
-        setFilter={setFilter}
+          currentFilters={filters}
+          setFilter={setFilter}
           closeForm={() => {
             setOpenForm(false);
           }}

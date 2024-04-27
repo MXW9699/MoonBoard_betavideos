@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
-enum V_GRADES {
+export enum V_GRADES {
   V0,
   V1,
   V2,
@@ -21,7 +21,7 @@ enum V_GRADES {
   V17,
 }
 
-enum FONT_GRADES {
+export enum FONT_GRADES {
   '4C' = 0,
   '5A' = 1,
   '5B' = 1,
@@ -51,6 +51,7 @@ export type FormType = 'ADD' | 'DELETE' | 'FILTER' | null;
 export interface Problem {
   id: number;
   name: string;
+  grade: V_GRADES | FONT_GRADES;
 }
 
 export interface ProblemProps {
