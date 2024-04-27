@@ -4,6 +4,7 @@ export default function makeDraggable(e, sideEffect) {
     windows.removeEventListener('mousemove', sideEffect);
     windows.removeEventListener('mouseup', removeSideEffects);
   }
+  
   windows.addEventListener('mousemove', sideEffect);
   windows.addEventListener('mouseup', removeSideEffects);
 }
