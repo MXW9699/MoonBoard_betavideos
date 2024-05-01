@@ -1,4 +1,6 @@
-enum V_GRADES {
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+
+export enum V_GRADES {
   V0,
   V1,
   V2,
@@ -16,10 +18,10 @@ enum V_GRADES {
   V14,
   V15,
   V16,
-  V18,
+  V17,
 }
 
-enum FONT_GRADES {
+export enum FONT_GRADES {
   '4C' = 0,
   '5A' = 1,
   '5B' = 1,
@@ -49,6 +51,7 @@ export type FormType = 'ADD' | 'DELETE' | 'FILTER' | null;
 export interface Problem {
   id: number;
   name: string;
+  grade: V_GRADES | FONT_GRADES;
 }
 
 export interface ProblemProps {
@@ -63,9 +66,28 @@ export interface ProblemProps {
 export interface FormPopUpProps {
   closeForm: () => void;
   formType: FormType;
+  currentFilters: Filter;
+  setFilter: Dispatch<SetStateAction<Filter>>;
 }
 
 export interface Video {
   ID: number;
   link: string;
+}
+
+export interface Filter {
+  maxGrade?: V_GRADES;
+  minGrade?: V_GRADES;
+  holds?: any[];
+}
+
+export interface SideNavProps {
+  formHandler: (a: FormType) => void;
+  searchHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+export interface FilterPageProps {
+  currentFilters: Filter;
+  setFilter: Dispatch<SetStateAction<Filter>>;
+  closeForm: () => void;
 }

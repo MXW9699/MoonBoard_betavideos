@@ -4,7 +4,12 @@ import DeleteVideo from './deleteVideo';
 import FilterPage from './filterPage';
 import { FormPopUpProps } from '../types/types';
 
-export default function FormPopUp({ closeForm, formType }: FormPopUpProps) {
+export default function FormPopUp({
+  closeForm,
+  formType,
+  currentFilters,
+  setFilter,
+}: FormPopUpProps) {
   return (
     <div className="addVideoForm">
       {(() => {
@@ -14,7 +19,13 @@ export default function FormPopUp({ closeForm, formType }: FormPopUpProps) {
           case 'DELETE':
             return <DeleteVideo closeForm={closeForm} />;
           case 'FILTER':
-            return <FilterPage />;
+            return (
+              <FilterPage
+                currentFilters={currentFilters}
+                setFilter={setFilter}
+                closeForm={closeForm} 
+              />
+            );
           default:
             null;
         }

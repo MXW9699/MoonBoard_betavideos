@@ -1,13 +1,7 @@
 import React, { ChangeEvent } from 'react';
-import { FormType } from '../types/types';
+import { SideNavProps } from '../types/types';
 
-const sideNav = ({
-  formHandler,
-  searchHandler,
-}: {
-  formHandler: (a: FormType) => void;
-  searchHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-}) => {
+export default function SideNav({ formHandler, searchHandler}: SideNavProps) {
   return (
     <nav className="sideNav">
       <h1 style={{ color: 'white', textAlign: 'center', margin: '1px' }}>
@@ -30,6 +24,4 @@ const sideNav = ({
       <button onClick={() => formHandler('DELETE')}>DELETE VIDEO</button>
     </nav>
   );
-};
-
-export default sideNav;
+}

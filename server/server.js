@@ -55,7 +55,7 @@ app.use('*', (req, res) => {
   return res.status(404).send('WHERE ARE YOU GOING?!?!?!');
 });
 
-// //global error handler
+//global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'some unknow error occured in application',
