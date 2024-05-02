@@ -19,8 +19,8 @@ module.exports = {
   getVideosByUser: (req, res, next) => {
     console.log('getting videos of user', req.params.id);
     db.from('Videos')
-      .select('*')
-      .eq('uploaded_by', req.params.id*1)
+      .select('*, Problems_2019(grade)')
+      .eq('uploaded_by', req.params.id * 1)
       .then((data) => {
         res.locals.videos = data.data;
         return next();

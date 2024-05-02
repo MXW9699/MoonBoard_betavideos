@@ -12,6 +12,7 @@ export default function ProfilePage() {
     fetch(`/video/user/${user}`)
       .then((data) => data.json())
       .then((data) => {
+        console.log(data);
         setVideos(data);
       })
       .catch(() => console.log('UNABLE TO GET VIDEOS'));
