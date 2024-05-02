@@ -34,6 +34,11 @@ app.get('/data', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
+//get database page
+app.get('/profile', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+});
+
 /*********************ACTIONS**************************************** */
 //handle login request
 app.post('/login', users.verifyUser, users.addUser, (req, res) => {

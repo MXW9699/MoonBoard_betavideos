@@ -1,7 +1,7 @@
 import Moonboard from '../Moonboard/moonboard';
 import { Problem } from '../types/types';
 import ProblemBox from './problemBox';
-import VideoSection from './videosSection';
+import VideoSection from './VideoSection';
 import React, { useState, useEffect } from 'react';
 
 let boardLights = new Set<any>();

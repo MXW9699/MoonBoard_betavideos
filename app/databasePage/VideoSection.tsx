@@ -1,8 +1,8 @@
 import React from 'react';
-import VideoBox from './videoBox';
 import { Video } from '../types/types';
+import VideoBox from './VideoBox';
 
-const videoSection = ({ vids }: { vids: Video[] }) => {
+const VideoSection = ({ vids }: { vids: Video[] }) => {
   return (
     <div className="videoSection">
       {vids.map((video) => {
@@ -12,4 +12,4 @@ const videoSection = ({ vids }: { vids: Video[] }) => {
   );
 };
 
-export default videoSection;
+export default VideoSection;
