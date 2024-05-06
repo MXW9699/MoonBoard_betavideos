@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Video } from '../types/types';
 import VideoBox from './VideoBox';
 
-const VideoSection = ({ vids }: { vids: Video[] }) => {
-  return (
-    <div className="videoSection">
-      {vids.map((video) => {
-        return <VideoBox key={`video${video.ID}`} source={video.link} />;
-      })}
-    </div>
+export default function VideoSection({ vids }: { vids: Video[] }) {
+  const memoSection = useMemo(
+    () => (
+      <div className="videoSection">
+        {vids.map((video) => {
+          return <VideoBox key={`video${video.ID}`} source={video.link} />;
+        })}
+      </div>
+    ),
+    [vids]
   );
-};
-
-export default VideoSection;
+  
+  return <>{memoSection}</>;
+}

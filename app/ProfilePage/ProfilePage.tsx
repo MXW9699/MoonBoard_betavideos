@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { isButtonElement } from 'react-router-dom/dist/dom';
-import VideoSection from '../databasePage/VideoSection';
+import { FONT_GRADES, Problem } from '../types/types';
+import ProfileVideoSection from './ProfileVideoSection';
 
 export default function ProfilePage() {
   const [videos, setVideos] = useState([]);
   const [tab, setTab] = useState('MoonBoard');
-  const [user, setUser] = useState('0');
+  const [user, setUser] = useState('1');
 
   async function fetchVideos() {
     fetch(`/video/user/${user}`)
       .then((data) => data.json())
       .then((data) => {
-        console.log(data);
-        setVideos(data);
+        const alphabetize = data.sort((a: any, b: any) => {
+          return a.problemName.localeCompare(b.problemName);
+        });
+        const sortedData = alphabetize.sort((a: any, b: any) => {
+          return (
+            FONT_GRADES[a.Problems_2019.grade as keyof typeof FONT_GRADES] -
+            FONT_GRADES[b.Problems_2019.grade as keyof typeof FONT_GRADES]
+          );
+        });
+        // console.log(sortedData);
+        setVideos(sortedData);
       })
       .catch(() => console.log('UNABLE TO GET VIDEOS'));
   }
@@ -40,7 +49,8 @@ export default function ProfilePage() {
         value={user}
       />
       <h1>{`${tab} is selected`}</h1>
-      {videos && <VideoSection vids={videos} />}
+      <ProfileVideoSection videos={videos} />
+      {/* {videos && <VideoSection vids={videos} />} */}
     </>
   );
 }
