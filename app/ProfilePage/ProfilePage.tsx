@@ -50,7 +50,6 @@ export default function ProfilePage() {
       />
       <h1>{`${tab} is selected`}</h1>
       <ProfileVideoSection videos={videos} />
-      {/* {videos && <VideoSection vids={videos} />} */}
     </>
   );
 }

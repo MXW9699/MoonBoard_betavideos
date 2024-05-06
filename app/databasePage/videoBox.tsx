@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
-export function VideoBox({ source }: { source: string }) {
+export default function VideoBox({
+  name,
+  source,
+}: {
+  name: String;
+  source: string;
+}) {
   const [loading, setLoading] = useState(true);
   const [cachedContent, setCachedContent] = useState<string | null>(null);
 
@@ -11,8 +17,7 @@ export function VideoBox({ source }: { source: string }) {
         loading="lazy"
         className="videoBox"
         src={cachedContent || source} // Use cached content if available, otherwise use source
-        onLoad={() => setLoading(false)} // set loaded after load
-        sandbox="allow-same-origin allow-scripts"
+        onLoad={() => setLoading(false)} // Call handleLoad when iframe is loaded
       />
     ),
     [source]
@@ -20,6 +25,7 @@ export function VideoBox({ source }: { source: string }) {
 
   useEffect(() => {
     // Check if the iframe content is cached
+    if (!source) setLoading(false);
     const cachedContent = localStorage.getItem(source);
     if (cachedContent) {
       setCachedContent(cachedContent); // Set cached content if available
@@ -29,7 +35,7 @@ export function VideoBox({ source }: { source: string }) {
   return (
     <div>
       {loading && <p>Loading...</p>}
-      {content}
+      {source ? content : <div className="videoBox">{name}</div>}
     </div>
   );
 }

@@ -73,6 +73,7 @@ export interface FormPopUpProps {
 export interface Video {
   ID: number;
   link: string;
+  problemName: string;
 }
 
 export interface Filter {
