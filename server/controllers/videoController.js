@@ -2,11 +2,25 @@ const db = require('../../model/database.js');
 
 module.exports = {
   //get problems
-  getVideos: (req, res, next) => {
+  getVideosByName: (req, res, next) => {
     console.log('getting videos', req.params.id);
     db.from('Videos')
       .select('*')
       .eq('problemName', req.params.id)
+      .then((data) => {
+        res.locals.videos = data.data;
+        return next();
+      })
+      .catch(() => {
+        return next({ log: 'error in getting videos' });
+      });
+  },
+
+  getVideosByUser: (req, res, next) => {
+    console.log('getting videos of user', req.params.id);
+    db.from('Videos')
+      .select('*, Problems_2019(grade)')
+      .eq('uploaded_by', req.params.id * 1)
       .then((data) => {
         res.locals.videos = data.data;
         return next();

@@ -23,6 +23,7 @@ module.exports = {
     proxy: {
       '/login': 'http://localhost:3000',
       '/data': 'http://localhost:3000',
+      '/profile': 'http://localhost:3000',
       '/video/': 'http://localhost:3000',
       '/**': 'http://localhost:3000',
     },
@@ -66,5 +67,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.jsx', '.js', '.tsx', '.ts'],
-  }
+  },
 };

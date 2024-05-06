@@ -1,12 +1,14 @@
 import React, { ChangeEvent } from 'react';
 import { SideNavProps } from '../types/types';
+import { Link } from 'react-router-dom';
 
-export default function SideNav({ formHandler, searchHandler}: SideNavProps) {
+export default function SideNav({ formHandler, searchHandler }: SideNavProps) {
   return (
     <nav className="sideNav">
       <h1 style={{ color: 'white', textAlign: 'center', margin: '1px' }}>
         Moonboard Videos
       </h1>
+      <Link to={'/profile'}>Profile</Link>
       <div>
         <textarea
           onChange={(e) => searchHandler(e)}

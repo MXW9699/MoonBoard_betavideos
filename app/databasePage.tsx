@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect } from 'react';
-import SideNav from './databasePage/sidenav';
+import SideNav from './UI Components/sidenav';
 import ProblemsView from './databasePage/ProblemsView';
 import FormPopup from './forms/FormPopUp';
 import { useState } from 'react';
