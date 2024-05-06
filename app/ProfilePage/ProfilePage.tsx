@@ -5,7 +5,7 @@ import ProfileVideoSection from './ProfileVideoSection';
 
 export default function ProfilePage() {
   const [videos, setVideos] = useState([]);
-  const [tab, setTab] = useState('MoonBoard');
+  const [tab, setTab] = useState('MoonBoard2019');
   const [user, setUser] = useState('1');
 
   async function fetchVideos() {
@@ -21,7 +21,6 @@ export default function ProfilePage() {
             FONT_GRADES[b.Problems_2019.grade as keyof typeof FONT_GRADES]
           );
         });
-        // console.log(sortedData);
         setVideos(sortedData);
       })
       .catch(() => console.log('UNABLE TO GET VIDEOS'));
@@ -35,12 +34,10 @@ export default function ProfilePage() {
     <>
       <div>welcom to my profile</div>
       <Link to={'/data'}>Back to data</Link>
-      <button onClick={() => setTab('MoonBoard2016')}>MoonBoard</button>
-      <button onClick={() => setTab('MoonBoard2019')}>MoonBoard</button>
-      <button onClick={() => setTab('TensionBoard')}>TensionBoard</button>
-      <button onClick={() => setTab('TensionBoard2Mirror')}>
-        TensionBoard2Mirror
-      </button>
+      <button onClick={() => setTab('MoonBoard2016')}>MoonBoard2016</button>
+      <button onClick={() => setTab('MoonBoard2019')}>MoonBoard2019</button>
+      <button onClick={() => setTab('TensionBoard')}>TB2Spray</button>
+      <button onClick={() => setTab('TensionBoard2Mirror')}>TB2Mirror</button>
       <input
         type="text"
         onChange={(e) => {
