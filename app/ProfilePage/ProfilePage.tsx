@@ -38,13 +38,13 @@ export default function ProfilePage() {
       <button onClick={() => setTab('MoonBoard2019')}>MoonBoard2019</button>
       <button onClick={() => setTab('TensionBoard')}>TB2Spray</button>
       <button onClick={() => setTab('TensionBoard2Mirror')}>TB2Mirror</button>
-      <input
+      {/* <input
         type="text"
         onChange={(e) => {
           setUser(e.target.value);
         }}
         value={user}
-      />
+      /> */}
       <h1>{`${tab} is selected`}</h1>
       <ProfileVideoSection videos={videos} />
     </>
