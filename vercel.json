@@ -2,7 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "build/**", 
+      "src": "build/bundle.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "build/*.html",
       "use": "@vercel/static"
     }
   ]
