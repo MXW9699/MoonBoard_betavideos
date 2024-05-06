@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
-const VideoBox = ({ source }: { source: string }) => {
+export function VideoBox({ source }: { source: string }) {
   const [loading, setLoading] = useState(true);
   const [cachedContent, setCachedContent] = useState<string | null>(null);
 
@@ -12,6 +12,7 @@ const VideoBox = ({ source }: { source: string }) => {
         className="videoBox"
         src={cachedContent || source} // Use cached content if available, otherwise use source
         onLoad={() => setLoading(false)} // set loaded after load
+        sandbox="allow-same-origin allow-scripts"
       />
     ),
     [source]
@@ -31,6 +32,4 @@ const VideoBox = ({ source }: { source: string }) => {
       {content}
     </div>
   );
-};
-
-export default VideoBox;
+}

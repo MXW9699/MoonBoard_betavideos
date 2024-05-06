@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Video } from '../types/types';
-import VideoBox from './VideoBox';
+import { VideoBox } from './VideoBox';
 
 export default function VideoSection({ vids }: { vids: Video[] }) {
   const memoSection = useMemo(
@@ -13,6 +13,6 @@ export default function VideoSection({ vids }: { vids: Video[] }) {
     ),
     [vids]
   );
-  
+
   return <>{memoSection}</>;
 }
