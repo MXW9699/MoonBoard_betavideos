@@ -3,6 +3,7 @@ import { Video } from '../types/types';
 import VideoBox from './VideoBox';
 
 
+
 export default function VideoSection({ vids }: { vids: Video[] }) {
   const memoSection = useMemo(
     () => (
