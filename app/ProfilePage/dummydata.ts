@@ -1,4 +1,4 @@
-export const dummyData = [
+const dummyData = [
     {
         "problemName": "TAG TEAM",
         "uploaded_by": 1,
@@ -910,3 +910,5 @@ export const dummyData = [
         }
     }
 ]
+
+export default dummyData
