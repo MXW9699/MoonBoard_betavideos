@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/login",
+      "dest": "/server/server.js"
+    },
+    {
+      "src": "/data",
+      "dest": "/server/server.js"
+    },
+    {
+      "src": "/profile",
+      "dest": "/server/server.js"
+    },
+    {
+      "src": "/updateHolds",
+      "dest": "/server/server.js"
+    },
+    {
+      "src": "/problemList",
+      "dest": "/server/server.js"
+    },
+    {
+      "src": "/video",
+      "dest": "/server/server.js"
+    }
+  ]
+}
