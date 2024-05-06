@@ -2,28 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FONT_GRADES, Problem } from '../types/types';
 import ProfileVideoSection from './ProfileVideoSection';
+import dummyData from './dummydata';
 
 export default function ProfilePage() {
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState<any>([]);
   const [tab, setTab] = useState('MoonBoard2019');
   const [user, setUser] = useState('1');
 
   async function fetchVideos() {
-    fetch(`/video/user/${user}`)
-      .then((data) => data.json())
-      .then((data) => {
-        const alphabetize = data.sort((a: any, b: any) => {
-          return a.problemName.localeCompare(b.problemName);
-        });
-        const sortedData = alphabetize.sort((a: any, b: any) => {
-          return (
-            FONT_GRADES[a.Problems_2019.grade as keyof typeof FONT_GRADES] -
-            FONT_GRADES[b.Problems_2019.grade as keyof typeof FONT_GRADES]
-          );
-        });
-        setVideos(sortedData);
-      })
-      .catch(() => console.log('UNABLE TO GET VIDEOS'));
+    try {
+      const response = await fetch(`/video/user/${user}`);
+      const data = response.ok ? await response.json() : dummyData;
+
+      const alphabetize = data.sort((a: any, b: any) => {
+        return a.problemName.localeCompare(b.problemName);
+      });
+      const sortedData = alphabetize.sort((a: any, b: any) => {
+        return (
+          FONT_GRADES[a.Problems_2019.grade as keyof typeof FONT_GRADES] -
+          FONT_GRADES[b.Problems_2019.grade as keyof typeof FONT_GRADES]
+        );
+      });
+      setVideos(sortedData);
+    } catch (e) {
+      console.log('UNABLE TO GET VIDEOS');
+    }
   }
 
   useEffect(() => {
