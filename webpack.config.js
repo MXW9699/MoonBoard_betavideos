@@ -30,7 +30,7 @@ module.exports = {
   },
 
   //template to follow when creating the webserver for dev enviroment
-  plugins: [new HTMLwebpackPlugin({ template: 'index.html' })],
+  plugins: [new HTMLwebpackPlugin({ template: './bundle/index.html' })],
 
   module: {
     //module rules for transpiling and compliling
