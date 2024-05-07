@@ -1,5 +1,6 @@
 const path = require('path');
 const HTMLwebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   //switch between production and development
@@ -10,9 +11,10 @@ module.exports = {
   //location to create the bundle.js file that will contain the consolidated application
   output: {
     //location will be the build folder created in the root
-    path: path.join(__dirname, 'build'),
+    path: path.resolve(__dirname, 'build'),
     //bundle.js will be the name
     filename: 'bundle.js',
+    publicPath: '/', // Public path for serving assets
   },
   //setup development server
   devServer: {
@@ -30,7 +32,11 @@ module.exports = {
   },
 
   //template to follow when creating the webserver for dev enviroment
-  plugins: [new HTMLwebpackPlugin({ template: 'index.html' })],
+  plugins: [
+    new CleanWebpackPlugin(), // Clean build folder before each build
+    ,
+    new HTMLwebpackPlugin({ template: './build/index.html' }),
+  ],
 
   module: {
     //module rules for transpiling and compliling
