@@ -14,11 +14,11 @@ app.use(express.urlencoded());
 
 /*********************CONTROLLER IMPORTS**************************************** */
 const users = require('./controllers/userController.js');
-const problems = require('./controllers/problemController');
+const problems = require('./controllers/problemController.js');
 
 /*********************ROUTER IMPORTS**************************************** */
-const videosRouter = require('./routers/videoRouter');
-const problemRouter = require('./routers/problemRouter');
+const videosRouter = require('./routers/videoRouter.js');
+const problemRouter = require('./routers/problemRouter.js');
 
 //statically serve the build folder which contains the bundle in the production environment
 app.use('/build', express.static(path.join(__dirname, '../build')));
@@ -75,8 +75,8 @@ app.use((err, req, res, next) => {
 });
 
 //start up server on PORT
-// app.listen(PORT, () => {
-//   console.log(`Server listening on port: ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
+});
 
 module.exports = app;
