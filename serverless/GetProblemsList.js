@@ -1,5 +1,5 @@
 // Import required dependencies
-const db = require('../../model/database.js');
+const db = require('../model/database');
 
 // Define the serverless function
 module.exports = async (req, res) => {
