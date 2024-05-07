@@ -1,8 +1,13 @@
 {
+  "version": 2,
   "routes": [
     {
       "src": "/problems",
       "dest": "/serverless/GetProblemsList"
+    },
+    {
+      "src": "/test",
+      "dest": "/serverless/test"
     }
   ]
 }
