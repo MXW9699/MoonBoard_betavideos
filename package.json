@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "nodemon api/index.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack serve --open & nodemon server/server.js"
+    "dev": "NODE_ENV=development webpack serve --open & nodemon api/index.js"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",

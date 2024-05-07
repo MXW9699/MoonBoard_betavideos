@@ -1,6 +1,5 @@
 const path = require('path');
 const HTMLwebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   //switch between production and development
@@ -33,8 +32,6 @@ module.exports = {
 
   //template to follow when creating the webserver for dev enviroment
   plugins: [
-    new CleanWebpackPlugin(), // Clean build folder before each build
-    ,
     new HTMLwebpackPlugin({ template: './build/index.html' }),
   ],
 
