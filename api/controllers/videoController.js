@@ -1,3 +1,4 @@
+const { getVideoSource } = require('../../Serverless/scraper.js');
 const db = require('../../model/database.js');
 
 module.exports = {
@@ -30,14 +31,26 @@ module.exports = {
       });
   },
 
-  updateVideo: (req, res, next) => {
+  updateVideo: async (req, res, next) => {
     const { username, link, problemName } = req.body;
     if (!(username && link && problemName)) {
       return next({ message: { err: 'empty fields' } });
     }
+    console.log(link);
+    const modifiedLink =
+      link.replace('/p/', '/reel/') + ((link.slice(-6) != '/embed')
+        ? 'embed'
+        : '');
+    console.log(modifiedLink);
+    const videoSource = await getVideoSource(modifiedLink);
+
     console.log('updating');
     db.from('Videos')
-      .update({ link: link.replace('/p/', '/reel/') + 'embed' })
+      .update({
+        link: modifiedLink,
+        video: videoSource.video,
+        img: videoSource.img,
+      })
       .eq('problemName', problemName.toUpperCase())
       .eq('uploaded_by', username)
       .then((data) => {
@@ -49,19 +62,25 @@ module.exports = {
       });
   },
 
-  addVideo: (req, res, next) => {
+  addVideo: async (req, res, next) => {
     let { username, link, problemName } = req.body;
     if (username == 'DYNA.MITCH') username = '1';
     if (!(username && link && problemName)) {
       return next({ message: { err: 'empty fields' } });
     }
-    const newLink = link.replace('/p/', '/reel/') + 'embed';
+    const modifiedLink =
+      link.replace('/p/', '/reel/') + ((link.slice(-6) != '/embed')
+        ? 'embed'
+        : '');
+    const videoSource = await getVideoSource(modifiedLink);
     db.from('Videos')
       .insert([
         {
           uploaded_by: username,
           problemName: problemName.toUpperCase(),
-          link: newLink,
+          link: modifiedLink,
+          video: videoSource.video,
+          img: videoSource.img,
         },
       ])
       .select()
@@ -70,7 +89,7 @@ module.exports = {
         return next();
       })
       .catch(() => {
-        return next({ log: 'error at upadating video' });
+        return next({ log: 'error at adding video' });
       });
   },
 

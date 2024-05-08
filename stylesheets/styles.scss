@@ -95,9 +95,24 @@ body {
 .videoBox {
   height: 350px;
   width: 350px;
-  margin: 10px;
   border: 1px solid green;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playButton {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .sideNav {

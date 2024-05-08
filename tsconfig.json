@@ -9,6 +9,6 @@
     // "noImplicitAny": true,
     "skipLibCheck": true
   },
-  "include": ["app/**/*.ts", "app/**/*.tsx", "app/app.tsx"],
+  "include": ["app/**/*.ts", "app/**/*.tsx", "app/app.tsx", "Serverless/*.ts", "Serverless/scraper.js"],
   "exclude": ["node_modules"]
 }

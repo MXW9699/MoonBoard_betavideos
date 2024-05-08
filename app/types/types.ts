@@ -70,10 +70,12 @@ export interface FormPopUpProps {
   setFilter: Dispatch<SetStateAction<Filter>>;
 }
 
-export interface Video {
+export interface VideoType {
   ID: number;
   link: string;
   problemName: string;
+  video: string;
+  img: string;
 }
 
 export interface Filter {

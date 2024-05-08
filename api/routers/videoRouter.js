@@ -18,7 +18,7 @@ router.post('/update', videos.updateVideo, (req, res) => {
 });
 
 router.post('/add', videos.updateVideo, videos.addVideo, (req, res) => {
-  return res.status(200);
+  return res.sendStatus(200);
 });
 
 router.post('/delete', videos.deleteVideos, (req, res) => {
