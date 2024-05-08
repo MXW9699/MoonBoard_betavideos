@@ -7,13 +7,23 @@ it is very hard to look up betavideos for a specific moonboard climb, even thoug
 
 
 **MVP Goals**
-have users upload/link moonboard problems with video
+have users upload/link moonboard problems with video[x]
+be able to look up a problem and see beta videos from other accounts [x]
+be able to look through all of your own beta videos sorted through problems [x]
+instagram scraping to get videos [x]
+be able to delete and reupload a video [x]
 
 **stretch**
+filtering on grades [partial]
+search by users[partial]
+show actual problem on board[partial]
+
+add other boards. [currently only 2019]
+responsive towards mobile
+rate limiting on api requests
 log in application with instagram. 
-be able to look up a problem and see beta videos from other accounts
+import all videos based on instagram handle [partial]
+better ui
 
-be able to look through all of your own beta videos sorted through problems
+STILL PERIODICALLY WORKING ON THIS....
 
-stretch
-**be able to delete and reupload a video**
