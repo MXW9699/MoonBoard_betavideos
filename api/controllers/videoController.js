@@ -5,9 +5,7 @@ module.exports = {
   //get problems
   getVideosByName: (req, res, next) => {
     console.log('getting videos', req.params.id);
-    db.from('Videos')
-      .select('*')
-      .eq('problemName', req.params.id)
+    db.getVideosByName(req.params.id)
       .then((data) => {
         res.locals.videos = data.data;
         return next();
@@ -19,9 +17,7 @@ module.exports = {
 
   getVideosByUser: (req, res, next) => {
     console.log('getting videos of user', req.params.id);
-    db.from('Videos')
-      .select('*, Problems_2019(grade)')
-      .eq('uploaded_by', req.params.id * 1)
+    db.getVideosByUser(req.params.id)
       .then((data) => {
         res.locals.videos = data.data;
         return next();
@@ -45,16 +41,12 @@ module.exports = {
     const videoSource = await getVideoSource(modifiedLink);
 
     console.log('updating');
-    db.from('Videos')
-      .update({
-        link: modifiedLink,
-        video: videoSource.video,
-        img: videoSource.img,
-      })
-      .eq('problemName', problemName.toUpperCase())
-      .eq('uploaded_by', username)
-      .then((data) => {
-        // console.log(data);
+    db.updateVideo(problemName, username, {
+      link: modifiedLink,
+      video: videoSource.video,
+      img: videoSource.img,
+    })
+      .then(() => {
         return next();
       })
       .catch(() => {
@@ -73,17 +65,13 @@ module.exports = {
         ? 'embed'
         : '');
     const videoSource = await getVideoSource(modifiedLink);
-    db.from('Videos')
-      .insert([
-        {
-          uploaded_by: username,
-          problemName: problemName.toUpperCase(),
-          link: modifiedLink,
-          video: videoSource.video,
-          img: videoSource.img,
-        },
-      ])
-      .select()
+    db.addVideo({
+      uploaded_by: username,
+      problemName: problemName.toUpperCase(),
+      link: modifiedLink,
+      video: videoSource.video,
+      img: videoSource.img,
+    })
       .then((data) => {
         console.log(data);
         return next();
@@ -96,10 +84,7 @@ module.exports = {
   deleteVideos: (req, res, next) => {
     console.log('STARTING TO DELETE');
     const { problemName } = req.body;
-    db.from('Videos')
-      .delete()
-      .eq('problemName', problemName)
-      .eq('uploaded_by', 1)
+    db.deleteVideos(problemName, 1)
       .then((data) => {
         console.log(data);
         return next();

@@ -5,12 +5,9 @@ const holdset = [];
 module.exports = {
   //get problems
   getList: (req, res, next) => {
-    let search = req.params.id ?? '';
+    const search = req.params.id ?? '';
 
-    db.from('Problems_2019')
-      .select('*')
-      .ilike('name', `%${search}%`)
-      .order('name', { ascending: true })
+    db.getProblemsList(search)
       .then((data) => {
         res.locals.problemsList = data.data;
         return next();
@@ -22,12 +19,8 @@ module.exports = {
 
   //get holds
   updateHolds: async (req, res, next) => {
-    // const { name, holdsets } = req.body;
     for (let i = 0; i < holdset.length; i++) {
-      await db
-        .from('Problems')
-        .update({ holds: holdset[i] })
-        .eq('id', i + 214);
+      await db.updateHolds(i + 214, holdset[i]);
     }
     return next();
   },

@@ -21,10 +21,7 @@ const users = {
   },
 
   addUser: (req, res, next) => {
-    console.log(db.from);
-    db.from('Users')
-      .insert([{ username: 'tryna', firstName: 'hello', lastName: 'world' }])
-      .select()
+    db.addUser({ username: 'tryna', firstName: 'hello', lastName: 'world' })
       .then((data) => {
         console.log('data:', data);
         return next();

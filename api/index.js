@@ -1,3 +1,6 @@
+// Load env first so DATABASE_URL is set before Prisma/pg are required
+require('dotenv').config();
+
 //allows us to process html requests
 const express = require('express');
 //allows us to read cookies

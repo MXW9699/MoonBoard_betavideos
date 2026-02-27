@@ -27,3 +27,36 @@ better ui
 
 STILL PERIODICALLY WORKING ON THIS....
 
+### 1. Start the Local PosGres Database with Docker
+
+To spin up the local PosGres container, run the following command:
+
+    npm run docker
+
+This will use Docker Compose to start the PosGres container based on the configuration in your `compose-local.yaml` file.
+
+### 2. Set Up the Backend Server
+
+After the database is running, follow these steps to start the backend server:
+
+#### Install Dependencies
+
+Install the required Node.js dependencies by running:
+
+    npm install
+
+Alternatively, if you’re using `pnpm`, you can run:
+
+    pnpm install
+
+#### Run Prisma Migrations
+To apply any pending database migrations with Prisma, run:
+
+    pnpm prisma generate
+    pnpm prisma migrate dev
+
+This will ensure your database schema is up-to-date with the current model definitions.
+
+To view the prisma database on the web interface http://localhost:5555 you can run
+
+    pnpm prisma studio
