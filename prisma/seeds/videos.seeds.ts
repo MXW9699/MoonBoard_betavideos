@@ -1,13 +1,7 @@
-/**
- * Seed the videos table from dummydata.ts.
- * Requires: user Dynamitch and problems already seeded (run insert-user.js and seed-problems.js first).
- * Resolves problemId by problemName, board, and fontGrade. Run from project root: node scripts/seed-videos.js
- */
-require("dotenv").config();
-const prisma = require("../model/prisma.js");
-const { videos } = require("../dummydata.ts");
+import type { PrismaClient } from "@prisma/client";
+import { videos } from "../../dummydata";
 
-async function main() {
+export async function seedVideos(prisma: PrismaClient) {
   const user = await prisma.users.findFirst({
     where: { username: "Dynamitch" },
   });
@@ -21,7 +15,12 @@ async function main() {
     keyToId.set(key, p.id);
   }
 
-  const data = [];
+  const data: {
+    uploaded_by: number;
+    problemId: number;
+    link: string;
+    video: string;
+  }[] = [];
   for (const v of videos) {
     const key = `${v.problemName}|${v.fontGrade ?? ""}|${v.board ?? ""}`;
     const problemId = keyToId.get(key);
@@ -37,11 +36,3 @@ async function main() {
   const result = await prisma.videos.createMany({ data, skipDuplicates: true });
   console.log("Videos: inserted", result.count);
 }
-
-main()
-  .then(() => process.exit(0))
-  .catch((err) => {
-    console.error("Insert failed:", err.message);
-    process.exit(1);
-  })
-  .finally(() => prisma.$disconnect());
