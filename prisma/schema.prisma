@@ -1,0 +1,45 @@
+// MoonBoard – Prisma schema
+// https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Problem {
+  id        Int      @id @default(autoincrement())
+  name      String
+  vGrade    String?
+  fontGrade String?
+  board     String?
+  videos    Videos[]
+
+  @@map("problems")
+}
+
+model Users {
+  id        Int      @id @default(autoincrement())
+  username  String
+  firstName String?
+  lastName  String?
+  videos    Videos[]
+
+  @@map("users")
+}
+
+model Videos {
+  id            Int     @id @default(autoincrement())
+  uploaded_user Users   @relation(fields: [uploaded_by], references: [id])
+  uploaded_by   Int
+  problem       Problem @relation(fields: [problemId], references: [id])
+  problemId     Int
+  link          String?
+  video         String?
+  img           String?
+
+  @@map("videos")
+}
