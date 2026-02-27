@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FONT_GRADES } from "../types/types";
 import ProfileVideoSection from "./ProfileVideoSection";
-import dummyData from "../../dummydata";
 
 /** Normalize API (flat) or dummyData (structured) to { problem, video }[]. */
-function toProblemVideoList(
-  data: any[],
-): {
+function toProblemVideoList(data: any[]): {
   problem: { name: string; fontGrade?: string };
   video: { ID: number; link: string; video: string; img?: string };
 }[] {
@@ -35,7 +32,7 @@ export default function ProfilePage() {
   async function fetchVideos() {
     try {
       const response = await fetch(`/video/user/${user}`);
-      const raw = response.ok ? await response.json() : dummyData;
+      const raw = response.ok ? await response.json() : [];
       const data = toProblemVideoList(Array.isArray(raw) ? raw : []);
 
       const alphabetize = data.sort((a: any, b: any) => {

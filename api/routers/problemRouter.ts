@@ -1,14 +1,14 @@
-const express = require('express');
-const problems = require('../controllers/problemController');
+import express from "express";
+import { getList } from "../controllers/problemController.ts";
 
 //create the router
 const router = express.Router();
 
-router.get('/:id', problems.getList, (req, res) => {
+router.get("/:id", getList, (req, res) => {
   return res.status(200).json(res.locals.problemsList);
 });
 
-router.get('/', problems.getList, (req, res) => {
+router.get("/", getList, (req, res) => {
   return res.status(200).json(res.locals.problemsList);
 });
 
@@ -24,4 +24,4 @@ router.get('/', problems.getList, (req, res) => {
 //   return res.status(200).send('deleted');
 // });
 //exporting the router
-module.exports = router;
+export { router };

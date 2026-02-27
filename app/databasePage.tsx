@@ -1,24 +1,29 @@
-import React, { ChangeEvent, useEffect } from 'react';
-import SideNav from './UI Components/sidenav';
-import ProblemsView from './databasePage/ProblemsView';
-import FormPopup from './forms/FormPopUp';
-import { useState } from 'react';
-import { FONT_GRADES, Filter, FormType, Problem } from './types/types';
+import React, { ChangeEvent, useEffect } from "react";
+import SideNav from "./UI Components/sidenav";
+import ProblemsView from "./databasePage/ProblemsView";
+import FormPopup from "./forms/FormPopUp";
+import { useState } from "react";
+import { FONT_GRADES, Filter, FormType, Problem } from "./types/types";
 
 const databasePage = () => {
   /*****************************STATES ********************************************** */
   const [openForm, setOpenForm] = useState(false); // FOR ADD AND DELETE FORMS
-  const [search, setSearch] = useState(''); // FOR SEARCHBAR FILTERING
+  const [search, setSearch] = useState(""); // FOR SEARCHBAR FILTERING
   const [data, setData] = useState<Problem[]>([]);
   const [form, setForm] = useState<FormType>(null);
   const [filters, setFilter] = useState<Filter>({ maxGrade: 17, minGrade: 0 });
 
-  async function getListOfProblems(year: string): Promise<void> {
+  async function getListOfProblems(): Promise<void> {
     try {
       const response = await fetch(`/problemList/${search}`);
-      if (!response.ok) throw new Error('COULD NOT GET PROBLEM LIST');
+      if (!response.ok) throw new Error("COULD NOT GET PROBLEM LIST");
       const data: Problem[] = await response.json();
-      setData(data);
+      console.log("data:", data);
+      const sortedData = data.sort((a: Problem, b: Problem) => {
+        if (a.vGrade === b.vGrade) return a.name.localeCompare(b.name);
+        else return a.vGrade.localeCompare(b.vGrade);
+      });
+      setData(sortedData);
     } catch (e) {
       console.log(e);
     }
@@ -26,9 +31,12 @@ const databasePage = () => {
 
   //get list of problems of first render
   useEffect(() => {
-    getListOfProblems('2019');
+    getListOfProblems();
   }, []);
 
+  useEffect(() => {
+    console.log("data:", data);
+  }, [data]);
   /*****************************SEARCH HANDLERS ********************************************** */
   //opens form of the specifed form type
   function formHandler(form: FormType): void {
@@ -44,21 +52,24 @@ const databasePage = () => {
   //TODO: FILTER DATA BASED ON THE FILTER STATE
   function filterData(data: Problem[]): Problem[] {
     return data?.filter((problem: Problem) => {
-      let grade = FONT_GRADES[problem.grade] as unknown as number;
-      return grade >= filters.minGrade! && grade <= filters.maxGrade!;
+      return (
+        parseInt(problem.vGrade) >= filters.minGrade! &&
+        parseInt(problem.vGrade) <= filters.maxGrade!
+      );
     });
   }
 
   let filteredData = filterData(data);
 
   filteredData = filteredData?.filter((problem) => {
-    return problem.name.includes(search);
+    if (search === "") return true;
+    return problem.name.toLowerCase().includes(search.toLowerCase());
   });
 
   return (
     <div className="datapage">
       <SideNav formHandler={formHandler} searchHandler={searchHandler} />
-      <ProblemsView data={filteredData} />
+      <ProblemsView data={data} />
       {openForm && (
         <FormPopup
           currentFilters={filters}

@@ -1,5 +1,5 @@
-import React from 'react';
-import { ProblemProps } from '../types/types';
+import React from "react";
+import { ProblemProps } from "../types/types";
 
 const problem = (props: ProblemProps) => {
   return (
@@ -11,7 +11,7 @@ const problem = (props: ProblemProps) => {
       }}
     >
       <span>
-        <b>{props.name}</b>({props.grade})
+        <b>{props.name}</b>({props.vGrade ?? ""})
       </span>
     </div>
   );

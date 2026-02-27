@@ -1,14 +1,33 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "jsx": "react",
-    "module": "commonjs",
+    "target": "ES2022",
+    "module": "ESNext",           // webpack likes ESNext or commonjs
+    "jsx": "react",               // ✅ needed for .tsx files
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    // "noImplicitAny": true,
-    "skipLibCheck": true
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "allowJs": true,              // optional if you have .js files
+    "noEmit": true,              // ✅ must emit for webpack
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["api/*"],
+      "@prisma/*": ["prisma/*"],
+      "@model/*": ["model/*"]
+    }
   },
-  "include": ["app/**/*.ts", "app/**/*.tsx", "app/app.tsx", "Serverless/*.ts", "Serverless/scraper.js", "dummydata.ts"],
-  "exclude": ["node_modules"]
+  "ts-node": {
+    "esm": true
+  },
+  "include": [
+    "api/**/*.ts",
+    "api/**/*.tsx",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "types/**/*.d.ts",
+    "utils/**/*.js",
+    "model/**/*.ts",
+    "prisma/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,4 +1,4 @@
-const { z } = require("zod");
+import { z } from "zod";
 
 /** Zod schema for Problem (create/update validation) */
 const problemCreateSchema = z.object({

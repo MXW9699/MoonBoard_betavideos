@@ -1,5 +1,8 @@
-const prisma = require('./prisma');
-const { validateProblemCreate, validateProblemUpdate } = require('./schemas/problemSchema');
+import prisma from "@model/prisma.ts";
+import {
+  validateProblemCreate,
+  validateProblemUpdate,
+} from "@model/schemas/problemSchema.ts";
 
 /**
  * Problem service using Prisma + Zod.
@@ -23,14 +26,16 @@ async function findProblemById(id) {
 async function findProblems(where = {}) {
   return prisma.problem.findMany({
     where,
-    orderBy: { name: 'asc' },
+    orderBy: { name: "asc" },
   });
 }
 
-async function findProblemsByNameSearch(search = '') {
+async function findProblemsByNameSearch(search = "") {
   return prisma.problem.findMany({
-    where: search ? { name: { contains: search, mode: 'insensitive' } } : undefined,
-    orderBy: { name: 'asc' },
+    where: search
+      ? { name: { contains: search, mode: "insensitive" } }
+      : undefined,
+    orderBy: { name: "asc" },
   });
 }
 
@@ -49,7 +54,7 @@ async function findProblemsWithOptions(options = {}) {
     skip: Math.max(0, skip),
     ...(select && { select }),
     ...(where && { where }),
-    orderBy: { name: 'asc' },
+    orderBy: { name: "asc" },
   });
 }
 

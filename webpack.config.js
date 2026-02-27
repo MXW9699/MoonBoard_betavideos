@@ -1,39 +1,41 @@
-const path = require('path');
-const HTMLwebpackPlugin = require('html-webpack-plugin');
+import path from "path";
+import { fileURLToPath } from "url";
+import HTMLWebpackPlugin from "html-webpack-plugin";
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   //switch between production and development
   mode: process.env.NODE_ENV,
   //entry point for loading all the files
-  entry: ['./client/index.js'],
+  entry: ["./client/index.js"],
 
   //location to create the bundle.js file that will contain the consolidated application
   output: {
     //location will be the build folder created in the root
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, "build"),
     //bundle.js will be the name
-    filename: 'bundle.js',
-    publicPath: '/', // Public path for serving assets
+    filename: "bundle.js",
+    publicPath: "/", // Public path for serving assets
   },
   //setup development server
   devServer: {
     //listen on port 8080
     port: 8080,
-    static: { directory: path.join(__dirname, 'build'), publicPath: '/build/' },
+    static: { directory: path.join(__dirname, "build"), publicPath: "/build/" },
     //set up proxies
     proxy: {
-      '/login': 'http://localhost:3000',
-      '/data': 'http://localhost:3000',
-      '/profile': 'http://localhost:3000',
-      '/video/': 'http://localhost:3000',
-      '/**': 'http://localhost:3000',
+      "/login": "http://localhost:3000",
+      "/data": "http://localhost:3000",
+      "/profile": "http://localhost:3000",
+      "/video/": "http://localhost:3000",
+      "/**": "http://localhost:3000",
     },
   },
 
   //template to follow when creating the webserver for dev enviroment
-  plugins: [
-    new HTMLwebpackPlugin({ template: './build/index.html' }),
-  ],
+  plugins: [new HTMLWebpackPlugin({ template: "./build/index.html" })],
 
   module: {
     //module rules for transpiling and compliling
@@ -43,13 +45,13 @@ module.exports = {
         test: /.jsx?/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
             presets: [
               //changes es6 format of js files to es5
-              ['@babel/preset-env', { targets: 'defaults' }],
+              ["@babel/preset-env", { targets: "defaults" }],
               //transpile jsx to js
-              ['@babel/preset-react', { targets: 'defaults' }],
+              ["@babel/preset-react", { targets: "defaults" }],
             ],
           },
         },
@@ -58,17 +60,24 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['ts-loader'],
+        use: [
+          {
+            loader: "ts-loader",
+            options: {
+              configFile: "tsconfig.frontend.json", // frontend config
+            },
+          },
+        ],
       },
       //rules to change sass files to css to strings that will be injected into the html body
       {
         test: /\.s?css/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
   },
   resolve: {
-    extensions: ['.jsx', '.js', '.tsx', '.ts'],
+    extensions: [".jsx", ".js", ".tsx", ".ts"],
   },
 };

@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ES2022",
+      "module": "ESNext",
+      "jsx": "react",          // needed for .tsx
+      "strict": true,
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+      "noEmit": false,         // must emit for webpack
+      "baseUrl": ".",
+      "paths": {
+        "@api/*": ["api/*"],
+        "@prisma/*": ["prisma/*"]
+      }
+    },
+    "include": ["app/**/*.ts", "app/**/*.tsx"]
+  }

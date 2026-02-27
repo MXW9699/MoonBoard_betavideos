@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Problem from './problem';
+import React, { useState, useEffect } from "react";
+import Problem from "./problem";
 
 //18 X 11 grid
 
@@ -15,13 +15,13 @@ const problemBox = ({
   for (let i = 0; i < problemList.length; i++) {
     probs.push(
       <Problem
-        key={problemList[i].name}
-        name={`${problemList[i].name}`}
-        setter={`${problemList[i].setter}`}
-        grade={`${problemList[i].grade}`}
-        holds={problemList[i].holds}
+        key={problemList[i].name ?? ""}
+        name={`${problemList[i].name ?? ""}`}
+        setter={`${problemList[i].setter ?? ""}`}
+        vGrade={`${problemList[i].vGrade ?? ""}`}
+        holds={problemList[i].holds ?? []}
         clickProblem={clickProblem}
-      />
+      />,
     );
   }
 
