@@ -4,6 +4,7 @@ import { ProblemProps } from "../types/types";
 const problem = (props: ProblemProps) => {
   return (
     <div
+      style={{ display: "flex", flexDirection: "column" }}
       className="problem"
       id={props.name}
       onClick={() => {
@@ -13,6 +14,7 @@ const problem = (props: ProblemProps) => {
       <span>
         <b>{props.name}</b>({props.vGrade ?? ""})
       </span>
+      {props.board ?? ""}
     </div>
   );
 };

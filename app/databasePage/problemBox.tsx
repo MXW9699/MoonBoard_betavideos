@@ -19,6 +19,7 @@ const problemBox = ({
         name={`${problemList[i].name ?? ""}`}
         setter={`${problemList[i].setter ?? ""}`}
         vGrade={`${problemList[i].vGrade ?? ""}`}
+        board={`${problemList[i].board ?? ""}`}
         holds={problemList[i].holds ?? []}
         clickProblem={clickProblem}
       />,

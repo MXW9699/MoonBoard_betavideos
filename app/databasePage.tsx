@@ -5,6 +5,9 @@ import FormPopup from "./forms/FormPopUp";
 import { useState } from "react";
 import { FONT_GRADES, Filter, FormType, Problem } from "./types/types";
 
+const ASC = 1;
+const DESC = -1;
+
 const databasePage = () => {
   /*****************************STATES ********************************************** */
   const [openForm, setOpenForm] = useState(false); // FOR ADD AND DELETE FORMS
@@ -12,13 +15,16 @@ const databasePage = () => {
   const [data, setData] = useState<Problem[]>([]);
   const [form, setForm] = useState<FormType>(null);
   const [filters, setFilter] = useState<Filter>({ maxGrade: 17, minGrade: 0 });
+  const [primarySort, setPrimarySort] = useState<[string, number] | null>(null);
+  const [secondarySort, setSecondarySort] = useState<[string, number] | null>(
+    null,
+  );
 
   async function getListOfProblems(): Promise<void> {
     try {
       const response = await fetch(`/problemList/${search}`);
       if (!response.ok) throw new Error("COULD NOT GET PROBLEM LIST");
       const data: Problem[] = await response.json();
-      console.log("data:", data);
       const sortedData = data.sort((a: Problem, b: Problem) => {
         if (a.vGrade === b.vGrade) return a.name.localeCompare(b.name);
         else return a.vGrade.localeCompare(b.vGrade);
@@ -29,14 +35,53 @@ const databasePage = () => {
     }
   }
 
+  function sortBy(sortBy: "name" | "vGrade"): void {
+    console.log("sorting by:", sortBy);
+    if (primarySort === null && secondarySort === null) {
+      setPrimarySort([sortBy, ASC]);
+    } else if (primarySort !== null && secondarySort === null) {
+      if (sortBy === primarySort[0]) {
+        setPrimarySort([sortBy, primarySort[1] * -1]);
+      } else {
+        setSecondarySort([sortBy, ASC]);
+      }
+    } else if (primarySort !== null && secondarySort !== null) {
+      if (sortBy === primarySort[0]) {
+        setPrimarySort([sortBy, primarySort[1] * -1]);
+      } else if (sortBy === secondarySort[0]) {
+        setSecondarySort([sortBy, secondarySort[1] * -1]);
+      }
+    }
+  }
   //get list of problems of first render
   useEffect(() => {
     getListOfProblems();
+    return () => {};
   }, []);
 
   useEffect(() => {
-    console.log("data:", data);
-  }, [data]);
+    if (!primarySort) return;
+    setData((prevData) =>
+      [...prevData].sort((a: Problem, b: Problem) => {
+        if (
+          a[primarySort[0] as keyof Problem] ===
+            b[primarySort[0] as keyof Problem] &&
+          secondarySort
+        ) {
+          return (
+            (a[secondarySort[0] as keyof Problem] as string).localeCompare(
+              b[secondarySort[0] as keyof Problem] as string,
+            ) * secondarySort[1]
+          );
+        }
+        return (
+          (a[primarySort[0] as keyof Problem] as string).localeCompare(
+            b[primarySort[0] as keyof Problem] as string,
+          ) * primarySort[1]
+        );
+      }),
+    );
+  }, [primarySort, secondarySort]);
   /*****************************SEARCH HANDLERS ********************************************** */
   //opens form of the specifed form type
   function formHandler(form: FormType): void {
@@ -69,6 +114,21 @@ const databasePage = () => {
   return (
     <div className="datapage">
       <SideNav formHandler={formHandler} searchHandler={searchHandler} />
+      <button>MoonBoard 2016</button>
+      <button>MoonBoard 2019</button>
+      <button>TensionBoard</button>
+      <button>TB2Spray</button>
+      <button>TB2Mirror</button>
+      <input
+        type="checkbox"
+        onChange={() => sortBy("name")}
+        name="Sort by name"
+      />
+      <input
+        type="checkbox"
+        onChange={() => sortBy("vGrade")}
+        name="Sort by vGrade"
+      />
       <ProblemsView data={data} />
       {openForm && (
         <FormPopup

@@ -41,6 +41,7 @@ export interface ProblemProps {
   name: string;
   vGrade: string;
   setter?: string;
+  board?: string;
   holds: any[];
   clickProblem: (a: string, b: any[]) => void;
 }
